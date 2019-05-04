@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const co = require('./webpack.conf.js');
 
 module.exports = merge(co(), {
-    mode: "production",
+    mode: "none",
     optimization: {minimize: true},
     devtool: 'null',
     plugins: [
