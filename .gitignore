@@ -6,7 +6,9 @@
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
-.idea/**/shelf
+.idea/
+node_modules/
+postcss.config.js
 
 # Generated files
 .idea/**/contentModel.xml
