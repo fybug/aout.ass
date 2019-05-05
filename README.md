@@ -54,7 +54,7 @@ npm install webpack webpack-cli webpack-dev-server -g
 ```
 安装依赖
 ```
-npm install webpack webpack-merge html-withimg-loader img-loader file-loader url-loader image-webpack-loader webpack-cli clean-webpack-plugin path html-webpack-plugin style-loader css-loader postcss-loader sass-loader --save-dev
+npm install webpack webpack-merge node-sass html-withimg-loader img-loader file-loader url-loader image-webpack-loader webpack-cli clean-webpack-plugin path html-webpack-plugin style-loader css-loader postcss-loader sass-loader --save-dev
 ```
 如果和我一样使用 `postcss` 的，可以自行配置一下
 

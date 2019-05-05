@@ -1,7 +1,7 @@
 /*
 npm install webpack webpack-cli webpack-dev-server -g
 
-npm install webpack webpack-merge html-withimg-loader img-loader file-loader url-loader image-webpack-loader webpack-cli clean-webpack-plugin path html-webpack-plugin style-loader css-loader postcss-loader sass-loader --save-dev
+npm install webpack webpack-merge html-withimg-loader node-sass img-loader file-loader url-loader image-webpack-loader webpack-cli clean-webpack-plugin path html-webpack-plugin style-loader css-loader postcss-loader sass-loader --save-dev
 */
 module.exports = () => {
     const cleanWebpackPlugin = require('clean-webpack-plugin');
@@ -103,7 +103,12 @@ module.exports = () => {
 
     /** 添加 html 导入配置*/
     function addHtml(htmlname, tmpname) {
-        let html = Object.assign(htmlout);
+        let html = {
+            filename: Object.assign(htmlout.filename),
+            template: Object.assign(htmlout.template),
+            inject: htmlout.inject,
+            minify: htmlout.minify
+        };
         html.filename = html.filename + htmlname;
         html.template = html.template + tmpname;
         return html;
