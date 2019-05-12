@@ -1,7 +1,7 @@
 /*
 npm install webpack webpack-cli webpack-dev-server -g
 
-npm install webpack webpack-merge html-withimg-loader node-sass img-loader file-loader url-loader image-webpack-loader webpack-cli clean-webpack-plugin path html-webpack-plugin style-loader css-loader postcss-loader sass-loader --save-dev
+npm install webpack webpack-merge webpack-cli node-sass clean-webpack-plugin html-webpack-plugin style-loader css-loader sass-loader url-loader img-loader file-loader html-withimg-loader image-webpack-loader postcss-loader --save-dev
 */
 module.exports = () => {
     const cleanWebpackPlugin = require('clean-webpack-plugin');
@@ -19,6 +19,7 @@ module.exports = () => {
         // 入口
         entry: {
             app: './src/lib/js/main.js'
+            // todo 公共模块
         },
         output: out,
 
@@ -43,7 +44,7 @@ module.exports = () => {
                     use: [{
                         loader: 'url-loader',
                         options: {
-                            limit: 8192,
+                            limit: 819200,
                             outputPath: 'static/img/',
                             name: '[name].[ext]'
                         }
@@ -136,7 +137,7 @@ module.exports = () => {
     }
 
 // -------------------------------------------------------------------
-    /* 这里进行配置 */
+    /* todo 这里进行配置页面模块 */
     // 导入 dome 页面
     addHtmlWebpackPlugin('dome');
 
