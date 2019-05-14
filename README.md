@@ -12,23 +12,23 @@
 <pre>
 ┃
 ┣ build // 编译文件夹
-┣ src // 源码
+┣ src   // 源码
 ┃ ┃
-┃ ┣ lib         // 该网站中公共部分的样式和模块
+┃ ┣ lib       // 该网站中公共部分的样式和模块
 ┃ ┃ ┃
 ┃ ┃ ┣ css
-┃ ┃ ┃  ┗ main.css // 公共样式，样式在 js 中导入
+┃ ┃ ┃ ┗ main.css     // 公共样式，样式在 js 中导入
 ┃ ┃ ┗ js
 ┃ ┃    ┃
-┃ ┃    ┗ main.js   // 公共模块入口文件
+┃ ┃    ┗ main.js      // 公共模块入口文件
 ┃ ┃
-┃ ┣ page        // 单独的页面
+┃ ┣ page      // 单独的页面
 ┃ ┃  ┃
 ┃ ┃  ┗ dome    // 页面模块示例
 ┃ ┃      ┃
 ┃ ┃      ┣ css        // 该页面的 css
 ┃ ┃      ┃ ┗ main.css    // 示例样式，样式均在 js 中导入
-┃ ┃      ┣ js        // 该页面的 js
+┃ ┃      ┣ js         // 该页面的 js
 ┃ ┃      ┃ ┗ main.js     // 该页面的入口 js 文件，编译时会以该文件为入口
 ┃ ┃      ┃
 ┃ ┃      ┗ index.html // 该页面的内容，编译后会变成该模块的名称
@@ -69,6 +69,9 @@ npm install webpack webpack-merge webpack-cli node-sass clean-webpack-plugin htm
 `addHtmlWebpackPlugin` 函数会将整个页面模块的入口放入 `webpack` 配置文件中
 
 **如果需要添加公共模块可以在** `webpack.conf.js` **中搜索 todo**
+
+### 额外
+内置了一些开发中的框架，请自行查看其中的注释
 
 ### 参与
 一个人的力量是有限的，一个项目终究需要大家一起完善

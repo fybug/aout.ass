@@ -18,7 +18,7 @@ module.exports = () => {
     var config = {
         // 入口
         entry: {
-            app: './src/lib/js/main.js'
+            app: './src/lib/js/main.js',
             // todo 公共模块
         },
         output: out,
