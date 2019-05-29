@@ -68,10 +68,10 @@ npm install webpack webpack-merge webpack-cli node-sass clean-webpack-plugin htm
 
 `addHtmlWebpackPlugin` 函数会将整个页面模块的入口放入 `webpack` 配置文件中
 
-**如果需要添加公共模块可以在** `webpack.conf.js` **中搜索 todo**
+**如果需要添加公共模块可以在** `webpack.conf.js` **中搜索 todo,每个页面中必须要有** `js/main.js`
 
 ### 额外
-内置了一些开发中的框架，请自行查看其中的注释
+内置了一些开发中的框架，请自行查看其中的注释,后期会在文档中补上
 
 ### 参与
 一个人的力量是有限的，一个项目终究需要大家一起完善

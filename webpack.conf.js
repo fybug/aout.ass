@@ -9,7 +9,7 @@ module.exports = () => {
     const webpack = require('webpack');
     const HtmlWebpackPlugin = require('html-webpack-plugin');
 // ----------------------------------------------------------------
-// 输出
+    /** 输出 */
     let out = {
         filename: '[name].js',
         path: path.resolve(__dirname, 'build')
@@ -40,7 +40,7 @@ module.exports = () => {
             },
                 // 静态资源
                 {
-                    test: /\.(gif|png|jpe?g|woff|svg|ttf|eot)$/,
+                    test: /\.(gif|png|jpe?g|woff.?|svg|ttf|eot|otf)$/,
                     use: [{
                         loader: 'url-loader',
                         options: {

@@ -1,6 +1,7 @@
 module.exports = (() => {
-    /** 数组工具类 */
-    let ob = {
+    /** 数组工具类
+     */
+    window.ASS.ArrayTools = {
         /** 移除数组中的一个元素
          *
          * @param {Array<Object>} fooder 要移除元素的数组
@@ -37,14 +38,12 @@ module.exports = (() => {
                 start = 1;
                 end = len;
 
-                last = 0;
-                laend = 0;
+                last = laend = 0;
             } else if (i === len - 1) { // 要移除的是最后一个元素
                 start = 0;
                 end = len - 1;
 
-                last = 0;
-                laend = 0;
+                last = laend = 0;
             } else { // 移除的是中间的元素
                 start = 0;
                 end = i;
@@ -61,8 +60,4 @@ module.exports = (() => {
             return ar;
         }
     };
-    /** 数组工具类
-     * @type {ob}
-     */
-    window.ArrayTools = ob;
 })();
