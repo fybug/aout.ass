@@ -1,0 +1,42 @@
+/* 字体 */
+@font-face {
+    font-family: 'SourceHanSans-Regular';
+    src: url("../static/fonts/SourceHanSans-Regular.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "SourceHanSans-Regular", serif;
+    font-size: 16px;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+}
+
+/* 调整内容大小限制 */
+.grid-container {
+    max-width: 75rem;
+}
+
+/* 铺满屏幕的高度 */
+.full-screen-height {
+    height: 100vh;
+}
+
+/* 铺满屏幕的宽度 */
+.full-screen-width {
+    width: 100vw;
+}
+
+/* 全屏切换 */
+.full-screen {
+    height: 100vh;
+    width: 100vw;
+}
