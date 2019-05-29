@@ -1,10 +1,9 @@
-/* 全局浏览器事件 */
-window.Brower = {};
+/** 全局浏览器事件 */
+window.ASS.Brower = {};
+window.ASS.B = ASS.Brower;
+
 require('./unit');
-// todo 浏览器类型事件
-// todo 浏览器版本事件
+// todo 时间事件
 // todo 浏览器关闭和刷新事件
-require('./onLoad');
-require('./onReady');
-require('./onMoustMove');
-require('./onMoustDon');
+require('./onRefresh');
+require('./onType');

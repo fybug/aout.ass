@@ -1,6 +1,6 @@
 module.exports = (() => {
-    /** 基础事件容器 */
-    window.Brower.Unit = () => {
+    /** @return {{add: (function(Function): number), load: load, evens: Array}} */
+    function EvenUnitS() {
         let ob = {
             /** 事件组
              * @type {Array<function>}
@@ -18,5 +18,11 @@ module.exports = (() => {
             }
         };
         return ob;
-    };
+    }
+
+    /** 基础事件容器
+     *
+     * @return {EvenUnitS}
+     */
+    window.ASS.Brower.EvenUnit = () => EvenUnitS();
 })();
