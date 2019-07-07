@@ -20,14 +20,14 @@ body, html {
     width: 100%;
 }
 
-/* 调整内容大小限制 */
-.grid-container {
-    max-width: 75rem;
-}
-
 /* 铺满屏幕的高度 */
 .full-screen-height {
     height: 100vh;
+}
+
+/* 可溢出铺满屏幕高度 */
+.min-full-screen-height {
+    min-height: 100vh;
 }
 
 /* 铺满屏幕的宽度 */
@@ -35,8 +35,25 @@ body, html {
     width: 100vw;
 }
 
-/* 全屏切换 */
+/* 全屏 */
 .full-screen {
     height: 100vh;
     width: 100vw;
+}
+
+/* 自动外边距 */
+.auto-margin {
+    margin: auto auto;
+}
+
+/* 自动横向外边距 */
+.auto-horizontal-margin {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 自动竖向外边距 */
+.auto-vertical-margin {
+    margin-top: auto;
+    margin-bottom: auto;
 }
