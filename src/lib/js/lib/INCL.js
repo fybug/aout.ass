@@ -8,11 +8,8 @@ window.A = window.ASS;
 // todo 注释
 
 // 工具
-require('./Unit/INCL');
+// require('./Unit/INCL');
 // 音频
-require('./Audio');
+// require('./Audio');
 // 浏览器全局事件
-require('./Brower/INCL');
-// 画布 2D 渲染
-require('./2D/INCL');
-
+// require('./Brower/INCL');
