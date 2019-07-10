@@ -5,6 +5,7 @@ module.exports = merge(co(), {
     devtool: '#eval-source-map', mode: "development",
     devServer: {
         contentBase: './build/',
-        port: 3000
+        port: 3000,
+        host: "localhost"
     }
 });
