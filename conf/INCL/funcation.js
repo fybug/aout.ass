@@ -68,18 +68,19 @@ global.addPage = (name, options) => {
         js_path: inPath + "/" + name + '/js/main.js',
 
         /** 要导入模块 */
-        chunks: [this.js_css, this.js]
+        chunks: undefined
     };
+    defoptions.chunks = [defoptions.js_css, defoptions.js];
 
     /* 判断传入的参数类型 */
-    if (options instanceof String) {
+    if (typeof (options) === "string") {
         defoptions.title = options;
     } else {
         /* 遍历输入的属性 */
-        for (let v of options) {
+        for (let v in options) {
             /* 判断是否有该属性 */
             if (defoptions[v] !== undefined && (typeof defoptions[v] === typeof options[v])) {
-                if (isArray(options[v]))
+                if (options[v] instanceof Array)
                     defoptions[v].push(options[v]);
                 else
                     defoptions[v] = options[v];
@@ -91,7 +92,33 @@ global.addPage = (name, options) => {
     addEntry(defoptions.js_css, defoptions.js_css_path, "async", false);
     addEntry(defoptions.js, defoptions.js_path, "defer", false);
 
-    let node = Object.assign(htmltmp); // 克隆配置模版
+    // html 加载配置模版
+    let node = {
+        meta: {
+            "viewport": "width=device-width, initial-scale=1, shrink-to-fit=n",
+            "x-ua-compatible": "ie=edge"
+        },
+        // 压缩
+        minify: {
+            caseSensitive: true,
+            collapseBooleanAttributes: true,
+            removeComments: true,
+            minifyCSS: true,
+            minifyJS: true,
+            minifyURLs: true,
+            removeAttributeQuotes: true,
+            removeEmptyAttributes: true, removeRedundantAttributes: true,
+            processConditionalComments: true, trimCustomFragments: true,
+            collapseWhitespace: true
+        },
+
+        inject: "head",
+        filename: undefined,
+        template: undefined,
+        favicon: icon,
+        chunks: undefined,
+        title: ""
+    };
 
     /* 填充配置 */
     node.title = defoptions.title;

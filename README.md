@@ -1,35 +1,56 @@
 # aout.ass
 todo
-**v 0.0.3**
+**v 0.0.4**
 
-用于 webpack 的手脚架,以每一个页面及相关文件作为一个模块搭建
+用于 `webpack` 的手脚架,以每一个页面及相关文件作为一个模块搭建
 
-内置一个轻量级 js 开发框架及 postcss 和 scss 支持
+内置一个轻量级 js 开发框架及 `postcss`、`jquery`、`modernizr`、`what-input` 支持
+
+不建议使用 `sass` 和 `less`
 
 可自行往内部添加需要的框架和模块
 
-### 架构
+# 架构
 <pre>
 ┃
 ┣ build // 编译文件夹
+┣ conf
+┃ ┃
+┃ ┣ INCL      // webpack 配置生成函数相关文件夹，建议别看
+┃ ┃
+┃ ┗ run.js    // 添加页面和模块的 js 
+┃
 ┣ src   // 源码
 ┃ ┃
-┃ ┣ lib       // 该网站中公共部分的样式和模块
+┃ ┣ lib       // 该网站中公共部分
 ┃ ┃ ┃
-┃ ┃ ┣ css
-┃ ┃ ┃ ┗ main.css     // 公共样式，样式在 js 中导入
-┃ ┃ ┗ js
+┃ ┃ ┣ css      // 公共样式文件夹，样式在 style.js 中导入
+┃ ┃ ┃ ┃
+┃ ┃ ┃ ┣ main.pcss     // 框架样式
+┃ ┃ ┃ ┗ project.pcss  // 项目样式
+┃ ┃ ┃
+┃ ┃ ┣ static   // 全局静态资源，比如字体
+┃ ┃ ┃
+┃ ┃ ┗ js       // 公共 js 文件夹，自带的模块已经默认导入
 ┃ ┃    ┃
-┃ ┃    ┗ main.js      // 公共模块入口文件
+┃ ┃    ┣ main.js        // 公共模块入口文件
+┃ ┃    ┣ style.js       // 公共样式导入文件，较大的样式和外部框架的样式建议单独开模块导入
+┃ ┃    ┃
+┃ ┃    ┣ lib            // 框架自带函数库( 测试 )，如需使用可手动导入
+┃ ┃    ┗ INCL           // 导入库，建议外部框架放这里
 ┃ ┃
-┃ ┣ page      // 单独的页面
+┃ ┣ page      // 页面存放模块
 ┃ ┃  ┃
-┃ ┃  ┗ dome    // 页面模块示例
+┃ ┃  ┗ dome    // 页面模块示例，实际名称自己定，需在 conf/run.js 中导入该模块
 ┃ ┃      ┃
 ┃ ┃      ┣ css        // 该页面的 css
-┃ ┃      ┃ ┗ main.css    // 示例样式，样式均在 js 中导入
+┃ ┃      ┃ ┃
+┃ ┃      ┃ ┗ main.pcss    // 示例样式，样式需在 js 中导入
+┃ ┃      ┃
 ┃ ┃      ┣ js         // 该页面的 js
+┃ ┃      ┃ ┃
 ┃ ┃      ┃ ┗ main.js     // 该页面的入口 js 文件，编译时会以该文件为入口
+┃ ┃      ┃ ┗ main_css.js // 该页面的样式导入文件，编译时会自动加入该界面的模块中
 ┃ ┃      ┃
 ┃ ┃      ┗ index.html // 该页面的内容，编译后会变成该模块的名称
 ┃ ┃
@@ -44,36 +65,50 @@ todo
 ┗ webpack.prod.js       // webpack 生产配置
 </pre>
 
-### 安装
+# 安装
 需要先安装 ` Node.js ` ，自行百度
 
 在项目文件夹中运行 `npm -y init` 初始化
 
-安装 `webpack` 和开发用 `dev-server`
+## 安装 `webpack` 和开发用 `dev-server`
+`webpack` 很好用的
 ```
 npm install webpack webpack-cli webpack-dev-server -g
 ```
-安装依赖
-```
-npm install webpack webpack-merge webpack-cli node-sass clean-webpack-plugin html-webpack-plugin style-loader css-loader sass-loader url-loader img-loader file-loader html-withimg-loader image-webpack-loader postcss-loader --save-dev
-```
-如果和我一样使用 `postcss` 的，可以自行配置一下
 
-### 使用
+### 安装项目依赖
+```
+npm install --save-dev clean-webpack-plugin css-loader file-loader html-webpack-plugin html-withimg-loader image-webpack-loader img-loader jquery resource-hints-webpack-plugin script-ext-html-webpack-plugin style-loader url-loader webpack webpack-cli webpack-merge what-input
+```
+## 安装 `postcss`
+本项目建议使用 `postcss` 
+```
+npm install postcss-cli -g
+```
+> 别用 `sass` 和 `less` 了好好用 css3 的新特性吧
+
+### 安装 `postcss` 模块
+```
+npm install --save-dev autoprefixer postcss-import cssnano postcss-apply postcss-nested
+```
+
+# 使用
 每次新建 `css` 样式后要在对应的模块的 `js` 入口中导入
 
-要导入依赖库 如 `jQuery` 等，可以使用 `npm` 安装或复制到 `lib/js` 中，并在 `main.js` 中导入
+要导入依赖库，可以使用 `npm` 安装或复制到 `lib/js` 中，并在 `main.js` 中导入。较大的建议在配置中作为模块单独导入
 
-导入页面需在 `/webpack.conf.js` 中对应的位置使用已编写好的 `addHtmlWebpackPlugin` 函数
+导入页面需在 `conf/run.js` 中使用已编写好的 `addPage( 页面名称, 标题 )` 函数
 
-`addHtmlWebpackPlugin` 函数会将整个页面模块的入口放入 `webpack` 配置文件中
+导入模块需在 `conf/run.js` 中使用 `addEntry_defer`、`addEntry_async`、`addEntry_sync` 导入，参数为 编译后的名称, 模块文件的位置
+```javascript
+addEntry_defer() // 延迟导入
+addEntry_async() // 异步导入
+addEntry_sync() // 阻塞导入
+``` 
+## 额外
+内置正在测试的轻量级框架，在 `src/lib/js/lib` 中均可在 `INCL.js` 中导入，但部分建议作为模块单独导入。以充分利用 **http2** 的多路复用特性
 
-**如果需要添加公共模块可以在** `webpack.conf.js` **中搜索 todo,每个页面中必须要有** `js/main.js`
-
-### 额外
-内置了一些开发中的框架，请自行查看其中的注释,后期会在文档中补上，如果需要使用可去除 `INCL` 中导入语句的注释
-
-### 参与
+# 参与
 一个人的力量是有限的，一个项目终究需要大家一起完善
 
 · fork 本仓库

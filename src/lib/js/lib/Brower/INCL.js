@@ -2,8 +2,9 @@
 window.ASS.Brower = {};
 window.ASS.B = ASS.Brower;
 
+/* 基类 */
 require('./unit');
-// todo 时间事件
-// todo 浏览器关闭和刷新事件
+// 时间事件
+// 浏览器关闭和刷新事件
 require('./onRefresh');
 require('./onType');

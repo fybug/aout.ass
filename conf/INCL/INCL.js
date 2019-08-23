@@ -1,4 +1,4 @@
-global.cleanWebpackPlugin = require('clean-webpack-plugin');
+global.CleanWebpackPlugin = require('clean-webpack-plugin');
 global.path = require('path');
 global.webpack = require('webpack');
 global.HtmlWebpackPlugin = require('html-webpack-plugin');

@@ -1,0 +1,57 @@
+/* 消息组 */
+messagegroup {
+    display: flex;
+    flex-flow: column;
+    position: fixed !important;
+    margin-left: 1rem;
+    padding-bottom: 2rem;
+    left: 0;
+    bottom: 0;
+
+    message {
+        margin-bottom: .5rem
+    }
+
+    message:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* 消息样式 */
+message {
+    border-radius: 5000px !important;
+    padding: .5rem 1rem;
+    margin: 0 .5rem;
+    border: 1px solid rgba(10, 10, 10, 0.25);
+    background-color: white;
+    color: #0a0a0a;
+
+    &.primary {
+        background-color: #d7ecfa;
+        color: #0a0a0a;
+    }
+
+    &.secondary {
+        background-color: #eaeaea;
+        color: #0a0a0a;
+    }
+
+    &.success {
+        background-color: #e1faea;
+        color: #0a0a0a;
+    }
+
+    &.alert {
+        background-color: #f7e4e1;
+        color: #0a0a0a;
+    }
+
+    &.warning {
+        background-color: #fff3d9;
+        color: #0a0a0a;
+    }
+
+    &:after {
+        border-radius: 50%;
+    }
+}

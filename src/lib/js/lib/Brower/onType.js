@@ -1,4 +1,5 @@
 module.exports = (() => {
+    /** 判断基准 */
     let ua = navigator.userAgent,
         device_reg = [
             /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
@@ -48,7 +49,7 @@ module.exports = (() => {
         if (typeob.now === undefined)
             typeob['evens'][type].push(even);
         else {
-            // todo 更方便的使用
+            // 更方便的使用
             // 检查当前是否有该事件
             for (let i = 0, len = typeob.now.length; i < len;)
                 (type === typeob.now[i++] || event());
@@ -133,6 +134,8 @@ module.exports = (() => {
      *   微博: weibo
      *   QQ浏览器: qqbrowser
      *   QQ: qq
+     *
+     *   用法 A.B.onType.add(()=>{},'qqbrowser');
      */
     ASS.Brower.onType = typeob;
     $(() => typeob.load());

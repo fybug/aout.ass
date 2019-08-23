@@ -17,15 +17,6 @@ global.config = {
         rules: [{
             test: /\.(css|pcss)$/,
             loader: 'style-loader?sourceMap!css-loader?sourceMap!postcss-loader?sourceMap',
-        }, {
-            test: /\.scss/,
-            use: [{
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader'
-            }, {
-                loader: 'sass-loader'
-            }]
         },
             // 静态资源
             {
@@ -34,7 +25,7 @@ global.config = {
                     loader: 'url-loader',
                     options: {
                         limit: 81920,
-                        outputPath: 'static/img/',
+                        outputPath: 'static/',
                         name: '[name].[ext]'
                     }
                 }, {loader: 'img-loader'}]
@@ -58,8 +49,13 @@ global.config = {
     },
     // 插件
     plugins: [
+        // jQ
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
         // 清理输出
-        new cleanWebpackPlugin({dry: 'test'}),
+        new CleanWebpackPlugin({dry: true, protectWebpackAssets: false}),
         new webpack.ProvidePlugin({_: 'lodash'}),
 
         new HtmlWebpackPlugin({
@@ -92,31 +88,6 @@ global.config = {
 };
 // 公共模块顺序列表
 global.chunks = [];
-// html 加载配置模版
-global.htmltmp = {
-    title: undefined,
-    meta: {
-        "viewport": "width=device-width, initial-scale=1, shrink-to-fit=n",
-        "x-ua-compatible": "ie=edge"
-    },
-    minify: {
-        caseSensitive: true,
-        collapseBooleanAttributes: true,
-        removeComments: true,
-        minifyCSS: true,
-        minifyJS: true,
-        minifyURLs: true,
-        removeAttributeQuotes: true,
-        removeEmptyAttributes: true, removeRedundantAttributes: true,
-        processConditionalComments: true, trimCustomFragments: true,
-        collapseWhitespace: true
-    },
-    inject: "head",
-    filename: undefined,
-    template: undefined,
-    favicon: icon,
-    chunks: []
-};
 // html 配置队列
 global.htmlQuery = [];
 
@@ -129,13 +100,18 @@ global.ScriptExtHtmlWebpackPluginConif = {
 
 require("./funcation.js");
 addEntry_defer("app", "./src/lib/js/main.js");
-addEntry_async("main_css", "./src/lib/js/style.js");
+addEntry_async("app_css", "./src/lib/js/style.js");
 
 /* 填充配置数据 */
 for (let i = 0, len = htmlQuery.length, tmp; i < len; i++) {
     tmp = htmlQuery[i]; // 缓存
 
-    tmp.chunks = Object.assign(chunks).push(tmp.chunks);
+    let arrtmp = [];
+    for (let i in chunks) arrtmp.push(chunks[i]);
+
+    for (let i in tmp.chunks) arrtmp.push(tmp.chunks[i]);
+    tmp.chunks = arrtmp;
+
     config.plugins.push(new HtmlWebpackPlugin(tmp));
 }
 
