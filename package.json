@@ -1,7 +1,7 @@
 {
-  "name": "themes",
-  "version": "1.2.0",
-  "description": "fybug 主题站点",
+  "name": "",
+  "version": "",
+  "description": "",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot -w --config webpack.dev.js",
@@ -20,6 +20,7 @@
     "image-webpack-loader": "^4.6.0",
     "img-loader": "^3.0.1",
     "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
     "postcss-apply": "^0.12.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",

@@ -78,7 +78,7 @@ npm install webpack webpack-cli webpack-dev-server -g
 
 ### 安装项目依赖
 ```
-npm install --save-dev clean-webpack-plugin css-loader file-loader html-webpack-plugin html-withimg-loader image-webpack-loader img-loader jquery resource-hints-webpack-plugin script-ext-html-webpack-plugin style-loader url-loader webpack webpack-cli webpack-merge what-input
+npm install --save-dev lodash clean-webpack-plugin css-loader file-loader html-webpack-plugin html-withimg-loader image-webpack-loader img-loader jquery resource-hints-webpack-plugin script-ext-html-webpack-plugin style-loader url-loader webpack webpack-cli webpack-merge what-input
 ```
 ## 安装 `postcss`
 本项目建议使用 `postcss` 
