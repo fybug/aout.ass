@@ -1,6 +1,6 @@
 /** 使用方法在 conf/run.js 中加入
  *
- * addEntry_async("float_message",inPath + "/../lib/js/lib/ui/float_message/main.js");
+ * addEntry_async("float_message",pagePath + "/../lib/js/lib/ui/float_message/main.js");
  *
  * 有问题就调整加载的顺序
  */

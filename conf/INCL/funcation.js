@@ -5,7 +5,7 @@
  * @param {string} type 模块载入方式，默认为延迟加载
  * @param {boolean} mode 是否为公共模块
  */
-global.addEntry = (name, path, type = "defer", mode = true) => {
+global.addEntry = (name, path, type, mode = true) => {
     config.entry[name] = path;
 
     if (mode) {
@@ -36,7 +36,32 @@ global.addEntry_async = (name, path) => addEntry(name, path, "async");
  * @param {string} name 模块名称
  * @param {string} path 路径
  */
-global.addEntry_defer = (name, path) => addEntry(name, path);
+global.addEntry_defer = (name, path) => addEntry(name, path, "defer");
+
+/** 添加页面模块
+ *
+ * 此处添加的模块采用阻塞加载
+ *
+ * @param {string} name 模块名称
+ * @param {string} path 路径
+ */
+global.addPageEntry_sync = (name, path) => addEntry(name, path, "sync", false);
+/** 添加页面模块
+ *
+ * 此处添加的模块采用异步加载
+ *
+ * @param {string} name 模块名称
+ * @param {string} path 路径
+ */
+global.addPageEntry_async = (name, path) => addEntry(name, path, "async", false);
+/** 添加页面模块
+ *
+ * 此处添加的模块采用延迟加载
+ *
+ * @param {string} name 模块名称
+ * @param {string} path 路径
+ */
+global.addPageEntry_defer = (name, path) => addEntry(name, path, "defer", false);
 
 /** 添加页面
  *
@@ -52,73 +77,48 @@ global.addPage = (name, options) => {
     let defoptions = {
         /** 标题 */
         title: "",
-        /** 输入文件路径 */
-        filename: inPath + '/' + name + "/index.html",
-        /** 输出文件路径 */
+        /** 页面 html 文件路径 */
+        filename: pagePath + '/' + name + "/index.html",
+        /** 输出 html 文件路径 */
         outfile: outPath + '/' + name + ".html",
 
         /** 样式模块名称 */
         js_css: name + "_css",
         /** 样式模块路径 */
-        js_css_path: inPath + "/" + name + "/js/main_css.js",
+        js_css_path: pagePath + "/" + name + "/js/main_css.js",
 
-        /** js 入口模块名称 */
+        /** 页面入口模块名称 */
         js: name,
-        /** js 入口模块路径 */
-        js_path: inPath + "/" + name + '/js/main.js',
+        /** 页面入口模块路径 */
+        js_path: pagePath + "/" + name + '/js/main.js',
 
+        /** 额外的模块 */
+        pagechunks: [],
         /** 要导入模块 */
         chunks: undefined
     };
-    defoptions.chunks = [defoptions.js_css, defoptions.js];
+    let defoptions_chunk = []; // 默认模块导入
+    defoptions.chunks = defoptions_chunk;
 
     /* 判断传入的参数类型 */
     if (typeof (options) === "string") {
         defoptions.title = options;
     } else {
-        /* 遍历输入的属性 */
-        for (let v in options) {
-            /* 判断是否有该属性 */
-            if (defoptions[v] !== undefined && (typeof defoptions[v] === typeof options[v])) {
-                if (options[v] instanceof Array)
-                    defoptions[v].push(options[v]);
-                else
-                    defoptions[v] = options[v];
-            }
-        }
+        /* 传入属性 */
+        for (let v in options) defoptions[v] = options[v];
     }
 
+    // 检查是否传入导入的模块
+    (defoptions_chunk === defoptions.chunks) && (defoptions.chunks = [defoptions.js_css, defoptions.js]);
     /* 载入模块 */
-    addEntry(defoptions.js_css, defoptions.js_css_path, "async", false);
-    addEntry(defoptions.js, defoptions.js_path, "defer", false);
+    (defoptions.js_css !== undefined) && addEntry(defoptions.js_css, defoptions.js_css_path, "async", false);
+    (defoptions.js !== undefined) && addEntry(defoptions.js, defoptions.js_path, "defer", false);
+
+    // 加入导入的模块
+    for (let v of defoptions.pagechunks) defoptions.chunks.push(v);
 
     // html 加载配置模版
-    let node = {
-        meta: {
-            "viewport": "width=device-width, initial-scale=1, shrink-to-fit=n",
-            "x-ua-compatible": "ie=edge"
-        },
-        // 压缩
-        minify: {
-            caseSensitive: true,
-            collapseBooleanAttributes: true,
-            removeComments: true,
-            minifyCSS: true,
-            minifyJS: true,
-            minifyURLs: true,
-            removeAttributeQuotes: true,
-            removeEmptyAttributes: true, removeRedundantAttributes: true,
-            processConditionalComments: true, trimCustomFragments: true,
-            collapseWhitespace: true
-        },
-
-        inject: "head",
-        filename: undefined,
-        template: undefined,
-        favicon: icon,
-        chunks: undefined,
-        title: ""
-    };
+    let node = new htmltmp();
 
     /* 填充配置 */
     node.title = defoptions.title;

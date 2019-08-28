@@ -1,8 +1,10 @@
 /** 使用示例 在 INCL.js 中导入
- * require("./img/dealImage.js");
+ * import dealImage from './img/delimg';
  *
  * 或者在 conf/run.js 中作为模块导入
- * addEntry_async("dealImage",inPath + "/../lib/js/lib/Uilt/img/dealImage.js");
+ * addEntry_async("dealImage",pagePath + "/../lib/js/lib/Uilt/img/dealImage.js");
+ *
+ * 或在上一层文件夹中的 INCL.js 中取消注释
  */
 
 /** 图片裁剪
@@ -15,7 +17,7 @@
  * @param {number} height 高度比例
  * @param {Image} node 存放处理后图像的 图像节点
  */
-window.dealImage = (image, width, height, node) => {
+export default function dealImage(image, width, height, node) {
     let x = 0, y = 0, img = new Image(), h, w;
 
     img.onload = () => {

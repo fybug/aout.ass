@@ -1,12 +1,11 @@
 # aout.ass
-todo
 **v 0.0.4**
 
-用于 `webpack` 的手脚架,以每一个页面及相关文件作为一个模块搭建
+用于 **webpack** 的手脚架,以每一个页面及相关文件作为一个模块搭建
 
-内置一个轻量级 js 开发框架及 `postcss`、`jquery`、`modernizr`、`what-input` 支持
+内置一个轻量级 js 开发框架及 **postcss**、**jquery**、**modernizr**、**what-input** 支持
 
-不建议使用 `sass` 和 `less`
+不建议使用 **sass** 和 **less**
 
 可自行往内部添加需要的框架和模块
 
@@ -66,12 +65,12 @@ todo
 </pre>
 
 # 安装
-需要先安装 ` Node.js ` ，自行百度
+需要先安装 **Node.js** ，自行百度
 
 在项目文件夹中运行 `npm -y init` 初始化
 
-## 安装 `webpack` 和开发用 `dev-server`
-`webpack` 很好用的
+## 安装 **webpack** 和开发用 **dev-server**
+**webpack** 很好用的
 ```
 npm install webpack webpack-cli webpack-dev-server -g
 ```
@@ -80,33 +79,33 @@ npm install webpack webpack-cli webpack-dev-server -g
 ```
 npm install --save-dev lodash clean-webpack-plugin css-loader file-loader html-webpack-plugin html-withimg-loader image-webpack-loader img-loader jquery resource-hints-webpack-plugin script-ext-html-webpack-plugin style-loader url-loader webpack webpack-cli webpack-merge what-input
 ```
-## 安装 `postcss`
-本项目建议使用 `postcss` 
+## 安装 **postcss**
+本项目建议使用 **postcss** 
 ```
 npm install postcss-cli -g
 ```
-> 别用 `sass` 和 `less` 了好好用 css3 的新特性吧
+> 别用 **sass** 和 **less** 了好好用 **css3** 的新特性吧
 
-### 安装 `postcss` 模块
+### 安装 **postcss** 模块
 ```
 npm install --save-dev autoprefixer postcss-import cssnano postcss-apply postcss-nested
 ```
 
 # 使用
-每次新建 `css` 样式后要在对应的模块的 `js` 入口中导入
+每次新建样式后要在对应的模块的 **js** 入口中导入
 
-要导入依赖库，可以使用 `npm` 安装或复制到 `lib/js` 中，并在 `main.js` 中导入。较大的建议在配置中作为模块单独导入
+要导入依赖库，可以使用 `npm` 安装或复制到 `lib/js` 中，并在 **main.js** 中导入。较大的建议在配置中作为模块单独导入
 
 导入页面需在 `conf/run.js` 中使用已编写好的 `addPage( 页面名称, 标题 )` 函数
 
-导入模块需在 `conf/run.js` 中使用 `addEntry_defer`、`addEntry_async`、`addEntry_sync` 导入，参数为 编译后的名称, 模块文件的位置
+导入模块需在 `conf/run.js` 中使用 `addEntry_defer || addEntry_async || addEntry_sync` 导入，参数为 编译后的名称, 模块文件的位置
 ```javascript
 addEntry_defer() // 延迟导入
 addEntry_async() // 异步导入
 addEntry_sync() // 阻塞导入
 ``` 
 ## 额外
-内置正在测试的轻量级框架，在 `src/lib/js/lib` 中均可在 `INCL.js` 中导入，但部分建议作为模块单独导入。以充分利用 **http2** 的多路复用特性
+内置正在测试的轻量级框架，在 `src/lib/js/lib` 中均可在 **INCL.js** 中导入，但部分建议作为模块单独导入。以充分利用 **http2** 的多路复用特性
 
 # 参与
 一个人的力量是有限的，一个项目终究需要大家一起完善

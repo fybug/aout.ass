@@ -1,7 +1,15 @@
-global.outPath = path.resolve(__dirname, '../../build');
-global.inPath = path.resolve(__dirname, '../../src/page');
-global.icon = './src/static/img/favicon.png';
-/** 配置文件 */
+/** 编译输出路径 */
+global.outPath = path.resolve(__dirname, '../../build/');
+/** 页面模块路径 */
+global.pagePath = path.resolve(__dirname, '../../src/page/');
+/** 外置模块路径 */
+global.jsINCLPath = path.resolve(__dirname, '../../src/lib/js/INCL/');
+/** 静态资源路径 */
+global.staticPath = path.resolve(__dirname, '../../src/static/');
+/** 全局图标路径 */
+global.iconPath = staticPath + 'img/favicon.png';
+
+/** 配置对象 */
 global.config = {
     // 入口
     entry: {},
@@ -14,16 +22,19 @@ global.config = {
 
     // 导入包
     module: {
-        rules: [{
-            test: /\.(css|pcss)$/,
-            loader: 'style-loader?sourceMap!css-loader?sourceMap!postcss-loader?sourceMap',
-        },
+        rules: [
+            // css 和 postcss 的加载处理
+            {
+                test: /\.(css|pcss)$/,
+                loader: 'style-loader?sourceMap!css-loader?sourceMap!postcss-loader?sourceMap',
+            },
             // 静态资源
             {
                 test: /\.(gif|png|jpe?g|woff.?|svg|ttf|eot|otf)$/,
                 use: [{
                     loader: 'url-loader',
                     options: {
+                        // 小于 8k 全部压缩
                         limit: 81920,
                         outputPath: 'static/',
                         name: '[name].[ext]'
@@ -49,7 +60,7 @@ global.config = {
     },
     // 插件
     plugins: [
-        // jQ
+        // jQ 导入
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
@@ -58,6 +69,7 @@ global.config = {
         new CleanWebpackPlugin({dry: true, protectWebpackAssets: false}),
         new webpack.ProvidePlugin({_: 'lodash'}),
 
+        // 入口
         new HtmlWebpackPlugin({
             title: "302 Found",
             meta: {
@@ -78,16 +90,16 @@ global.config = {
             },
             inject: "head",
             filename: outPath + '/index.html',
-            template: inPath + '/../index.html',
-            favicon: icon,
+            template: pagePath + '/../index.html',
+            favicon: iconPath,
             chunks: []
         })
-    ], performance: {
-        hints: false
-    }
+    ], performance: {hints: false}
 };
-// 公共模块顺序列表
+
+// 公共模块列表
 global.chunks = [];
+require('./htmltmp.js');
 // html 配置队列
 global.htmlQuery = [];
 

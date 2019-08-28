@@ -8,7 +8,7 @@
     "bulic": "webpack -p --config webpack.prod.js"
   },
   "author": "fybug",
-  "license": "ISC",
+  "license": "Apache2",
   "devDependencies": {
     "autoprefixer": "^9.6.1",
     "clean-webpack-plugin": "^2.0.2",
