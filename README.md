@@ -15,6 +15,7 @@
 ┣ build // 编译文件夹
 ┣ conf
 ┃ ┃
+┃ ┣ config    // webpack 配置生成配置（对，配置生成器的配置），可自定义修改内部
 ┃ ┣ INCL      // webpack 配置生成函数相关文件夹，建议别看
 ┃ ┃
 ┃ ┗ run.js    // 添加页面和模块的 js 
@@ -92,18 +93,9 @@ npm install --save-dev autoprefixer postcss-import cssnano postcss-apply postcss
 ```
 
 # 使用
-每次新建样式后要在对应的模块的 **js** 入口中导入
+直接解压作为项目文件夹即可
 
-要导入依赖库，可以使用 `npm` 安装或复制到 `lib/js` 中，并在 **main.js** 中导入。较大的建议在配置中作为模块单独导入
-
-导入页面需在 `conf/run.js` 中使用已编写好的 `addPage( 页面名称, 标题 )` 函数
-
-导入模块需在 `conf/run.js` 中使用 `addEntry_defer || addEntry_async || addEntry_sync` 导入，参数为 编译后的名称, 模块文件的位置
-```javascript
-addEntry_defer() // 延迟导入
-addEntry_async() // 异步导入
-addEntry_sync() // 阻塞导入
-``` 
+在 `/src/page/` 中按照示例的 `main` 文件夹的格式新建文件夹即可
 ## 额外
 内置正在测试的轻量级框架，在 `src/lib/js/lib` 中均可在 **INCL.js** 中导入，但部分建议作为模块单独导入。以充分利用 **http2** 的多路复用特性
 

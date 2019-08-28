@@ -1,3 +1,6 @@
+require('../config/pageconf.js');
+require('../config/htmltmp.js');
+
 /** 添加模块
  *
  * @param {string} name 模块名称
@@ -71,60 +74,32 @@ global.addPageEntry_defer = (name, path) => addEntry(name, path, "defer", false)
  *      导入 css 的 js 入口:/src/page/[页面名称]/js/main_css.js
  *
  * @param {string} name 页面名称
- * @param {string|Object} options 配置或标题
+ * @param {string|Object} userop 配置或标题
  */
-global.addPage = (name, options) => {
-    let defoptions = {
-        /** 标题 */
-        title: "",
-        /** 页面 html 文件路径 */
-        filename: pagePath + '/' + name + "/index.html",
-        /** 输出 html 文件路径 */
-        outfile: outPath + '/' + name + ".html",
-
-        /** 样式模块名称 */
-        js_css: name + "_css",
-        /** 样式模块路径 */
-        js_css_path: pagePath + "/" + name + "/js/main_css.js",
-
-        /** 页面入口模块名称 */
-        js: name,
-        /** 页面入口模块路径 */
-        js_path: pagePath + "/" + name + '/js/main.js',
-
-        /** 额外的模块 */
-        pagechunks: [],
-        /** 要导入模块 */
-        chunks: undefined
-    };
-    let defoptions_chunk = []; // 默认模块导入
-    defoptions.chunks = defoptions_chunk;
+global.addPage = (name, userop) => {
+    let opitons = getPageconf(name);
+    let options_chunk = []; // 默认模块导入
+    opitons.chunks = options_chunk;
 
     /* 判断传入的参数类型 */
-    if (typeof (options) === "string") {
-        defoptions.title = options;
+    if (typeof (userop) === "string") {
+        opitons.title = userop;
     } else {
         /* 传入属性 */
-        for (let v in options) defoptions[v] = options[v];
+        for (let v in userop) opitons[v] = userop[v];
     }
 
     // 检查是否传入导入的模块
-    (defoptions_chunk === defoptions.chunks) && (defoptions.chunks = [defoptions.js_css, defoptions.js]);
+    (options_chunk === opitons.chunks) && (opitons.chunks = getPageconfchuncks(name, opitons));
     /* 载入模块 */
-    (defoptions.js_css !== undefined) && addEntry(defoptions.js_css, defoptions.js_css_path, "async", false);
-    (defoptions.js !== undefined) && addEntry(defoptions.js, defoptions.js_path, "defer", false);
+    (opitons.js_css !== undefined) && addEntry(opitons.js_css, opitons.js_css_path, "async", false);
+    (opitons.js !== undefined) && addEntry(opitons.js, opitons.js_path, "defer", false);
 
     // 加入导入的模块
-    for (let v of defoptions.pagechunks) defoptions.chunks.push(v);
+    for (let v of opitons.pagechunks) opitons.chunks.push(v);
 
     // html 加载配置模版
-    let node = new htmltmp();
-
-    /* 填充配置 */
-    node.title = defoptions.title;
-    node.template = defoptions.filename;
-    node.filename = defoptions.outfile;
-    node.chunks = defoptions.chunks;
+    let node = getHtmltmp(name, opitons);
 
     // 加入队列
     htmlQuery.push(node);
