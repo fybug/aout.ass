@@ -1,6 +1,7 @@
-require('../config/pageconf.js');
+// 导入路径配置
+require('../config/pathconf.js');
 
-/** 配置对象 */
+/** 配置存放对象 */
 global.config = {
     // 入口
     entry: {},
@@ -62,11 +63,6 @@ global.config = {
 
         // 入口
         new HtmlWebpackPlugin({
-            title: "302 Found",
-            /*meta: {
-                "viewport": "width=device-width, initial-scale=1, shrink-to-fit=n",
-                "x-ua-compatible": "ie=edge"
-            },*/
             minify: {
                 caseSensitive: true,
                 collapseBooleanAttributes: true,
@@ -80,8 +76,8 @@ global.config = {
                 collapseWhitespace: true
             },
             inject: "head",
-            filename: outPath + '/index.html',
-            template: pagePath + '/../index.html',
+            filename: outPath + 'index.html',
+            template: pagePath + '../index.html',
             favicon: iconPath,
             chunks: []
         })
@@ -91,32 +87,34 @@ global.config = {
 // 公共模块列表
 global.chunks = [];
 
-require('../config/htmltmp.js');
 // html 配置队列
 global.htmlQuery = [];
 
 // js 加载模式表
 global.ScriptExtHtmlWebpackPluginConif = {
+    // 同步加载
     sync: [],
+    // 延迟加载
     defer: [],
+    // 异步加载
     async: []
 };
 
+// 载入函数库
 require("./funcation.js");
+
+/* 导入默认公共模块 */
 addEntry_defer("app", "./src/lib/js/main.js");
 addEntry_async("app_css", "./src/lib/js/style.js");
 
+// 用户的配置
+require("../run.js");
+
 /* 填充配置数据 */
-for (let i = 0, len = htmlQuery.length, tmp; i < len; i++) {
-    tmp = htmlQuery[i]; // 缓存
-
-    let arrtmp = [];
-    for (let i in chunks) arrtmp.push(chunks[i]);
-
-    for (let i in tmp.chunks) arrtmp.push(tmp.chunks[i]);
-    tmp.chunks = arrtmp;
-
+for (let tmp of htmlQuery) {
+    tmp.chunks = [...chunks, ...tmp.chunks];
     config.plugins.push(new HtmlWebpackPlugin(tmp));
 }
 
+// 载入 js 加载模式
 config.plugins.push(new ScriptExtHtmlWebpackPlugin(ScriptExtHtmlWebpackPluginConif));

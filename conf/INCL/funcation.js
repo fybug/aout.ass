@@ -1,4 +1,6 @@
+// 页面配置模版
 require('../config/pageconf.js');
+// 导入 html 配置模版
 require('../config/htmltmp.js');
 
 /** 添加模块
@@ -8,14 +10,13 @@ require('../config/htmltmp.js');
  * @param {string} type 模块载入方式，默认为延迟加载
  * @param {boolean} mode 是否为公共模块
  */
-global.addEntry = (name, path, type, mode = true) => {
+global.addEntry = (name, path, type = "defer", mode = true) => {
     config.entry[name] = path;
+    ScriptExtHtmlWebpackPluginConif[type].push(name);
 
-    if (mode) {
-        ScriptExtHtmlWebpackPluginConif[type].push(name);
-        chunks.push(name);
-    }
+    mode && chunks.push(name);
 };
+
 /** 添加公共模块
  *
  * 此处添加的模块采用阻塞加载
@@ -74,29 +75,27 @@ global.addPageEntry_defer = (name, path) => addEntry(name, path, "defer", false)
  *      导入 css 的 js 入口:/src/page/[页面名称]/js/main_css.js
  *
  * @param {string} name 页面名称
- * @param {string|Object} userop 配置或标题
+ * @param {Object} userop 配置
  */
-global.addPage = (name, userop) => {
-    let opitons = getPageconf(name);
-    let options_chunk = []; // 默认模块导入
-    opitons.chunks = options_chunk;
+global.addPage = (name, userop = {}) => {
+    let opitons = getPageconf(name); // 配置模版
+    opitons.chunks = [];
 
-    /* 判断传入的参数类型 */
-    if (typeof (userop) === "string") {
-        opitons.title = userop;
-    } else {
-        /* 传入属性 */
-        for (let v in userop) opitons[v] = userop[v];
-    }
+    // 传入属性
+    Object.assign(opitons, userop);
 
-    // 检查是否传入导入的模块
-    (options_chunk === opitons.chunks) && (opitons.chunks = getPageconfchuncks(name, opitons));
+    // 检查是否传入导入的模块,没有则使用默认模块
+    (opitons.chunks.length === 0) && (opitons.chunks = getPageconfchuncks(name, opitons));
+
     /* 载入模块 */
-    (opitons.js_css !== undefined) && addEntry(opitons.js_css, opitons.js_css_path, "async", false);
-    (opitons.js !== undefined) && addEntry(opitons.js, opitons.js_path, "defer", false);
+    // css 导入，采用异步
+    opitons.js_css && addEntry(opitons.js_css, opitons.js_css_path, "async", false);
+    // js 导入，采用延迟
+    opitons.js && addEntry(opitons.js, opitons.js_path, "defer", false);
 
     // 加入导入的模块
-    for (let v of opitons.pagechunks) opitons.chunks.push(v);
+    if (opitons.pagechunks.length > 0)
+        opitons.chunks.push(...opitons.pagechunks);
 
     // html 加载配置模版
     let node = getHtmltmp(name, opitons);
@@ -104,5 +103,3 @@ global.addPage = (name, userop) => {
     // 加入队列
     htmlQuery.push(node);
 };
-
-require("../run.js");
