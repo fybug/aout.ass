@@ -4,22 +4,19 @@
  */
 global.getPageconf = (name) => {
     return {
-        /** 标题 */
-        title: "",
         /** 页面 html 文件路径 */
-        filename: pagePath + '/' + name + "/index.html",
+        filename: pagePath + name + "/index.html",
         /** 输出 html 文件路径 */
-        outfile: outPath + '/' + name + ".html",
+        outfile: outPath + name + ".html",
 
         /** 样式模块名称 */
         js_css: name + "_css",
         /** 样式模块路径 */
-        js_css_path: pagePath + "/" + name + "/js/main_css.js",
-
+        js_css_path: pagePath + name + "/js/main_css.js",
         /** 页面入口模块名称 */
         js: name,
         /** 页面入口模块路径 */
-        js_path: pagePath + "/" + name + '/js/main.js',
+        js_path: pagePath + name + '/js/main.js',
 
         /** 额外的模块 */
         pagechunks: [],

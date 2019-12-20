@@ -3,7 +3,7 @@
  * @param {string} name 页面名称
  * @param {Object} option 页面配置
  */
-global.getHtmlmeta = (name, option) => {
+global.getHtmlmeta = (name = "", option = {}) => {
     return {
         "viewport": "width=device-width, initial-scale=1, shrink-to-fit=n",
         "x-ua-compatible": "ie=edge"
@@ -18,7 +18,7 @@ global.getHtmlmeta = (name, option) => {
 global.getHtmltmp = (name, option) => {
     return {
         // 头部 meta 数据
-        meta: getHtmlmeta(name, option),
+        meta: getHtmlmeta(),
 
         minify: {
             caseSensitive: true,
@@ -43,7 +43,5 @@ global.getHtmltmp = (name, option) => {
         template: option.filename,
         // 导入模块
         chunks: option.chunks,
-        // 标题
-        title: option.title
     };
 };
