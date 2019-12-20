@@ -10,7 +10,7 @@
   "author": "fybug",
   "license": "Apache2",
   "devDependencies": {
-    "autoprefixer": "^9.6.1",
+    "autoprefixer": "^9.7.3",
     "clean-webpack-plugin": "^2.0.2",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
@@ -24,15 +24,15 @@
     "postcss-apply": "^0.12.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "postcss-nested": "^4.1.2",
+    "postcss-nested": "^4.2.1",
     "resource-hints-webpack-plugin": "0.0.2",
     "script-ext-html-webpack-plugin": "^2.1.4",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.7",
-    "webpack-merge": "^4.2.1",
-    "what-input": "^5.2.3"
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2",
+    "what-input": "^5.2.6"
   },
   "main": "postcss.config.js",
   "keywords": []

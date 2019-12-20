@@ -9,7 +9,7 @@ module.exports = {
         atimport,
         apply, nested,
         autoprefixer({
-            browsers: ['last 2 version']
+            overrideBrowserslist: ['> 0.15% in CN']
         }),
         cssnanao
     ]
