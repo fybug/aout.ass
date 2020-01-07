@@ -1,0 +1,1 @@
+module.exports = (name, defa) => Conf[name + 'Out'].outName || defa;

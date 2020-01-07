@@ -3,7 +3,7 @@
 
 用于 **webpack** 的手脚架,以每一个页面及相关文件作为一个模块搭建
 
-内置一个轻量级 js 开发框架及 **postcss**、**jquery**、**modernizr**、**what-input** 支持
+内置一个轻量级 js 开发框架及 **postcss**、**jquery** 支持
 
 不建议使用 **sass** 和 **less**
 
@@ -78,7 +78,7 @@ npm install webpack webpack-cli webpack-dev-server -g
 
 ### 安装项目依赖
 ```
-npm install --save-dev lodash clean-webpack-plugin css-loader file-loader html-webpack-plugin html-withimg-loader image-webpack-loader img-loader jquery resource-hints-webpack-plugin script-ext-html-webpack-plugin style-loader url-loader webpack webpack-cli webpack-merge what-input
+npm install --save-dev
 ```
 ## 安装 **postcss**
 本项目建议使用 **postcss** 
@@ -87,9 +87,13 @@ npm install postcss-cli -g
 ```
 > 别用 **sass** 和 **less** 了好好用 **css3** 的新特性吧
 
-### 安装 **postcss** 模块
+### 使用的 **postcss** 模块
 ```
-npm install --save-dev autoprefixer postcss-import cssnano postcss-apply postcss-nested
+autoprefixer
+postcss-import
+cssnano
+postcss-apply
+postcss-nested
 ```
 
 # 使用

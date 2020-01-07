@@ -1,9 +1,8 @@
-const merge = require('webpack-merge');
-const webpack = require('webpack');
-const co = require('./webpack.conf.js');
+const config = require('./webpack.conf.js');
 
-module.exports = merge(co(), {
+module.exports = merge(config, {
     mode: "none",
+    // 代码压缩插件
     optimization: {minimize: true},
     devtool: 'null',
     plugins: [

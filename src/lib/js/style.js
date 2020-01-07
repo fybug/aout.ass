@@ -3,3 +3,4 @@
 // 在这两个前面导入
 require('../css/main.pcss');
 require('../css/project.pcss');
+require('../css/font-awesome.css');

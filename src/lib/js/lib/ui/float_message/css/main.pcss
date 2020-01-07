@@ -1,35 +1,5 @@
-/* 消息组 */
-messagegroup {
-    /* 固定定位的纵向弹性盒 */
-    display: flex;
-    flex-flow: column;
-    position: fixed !important;
-    /* 贴紧屏幕左下角，并左移 1rem 上移 2rem */
-    left: 0;
-    bottom: 0;
-    margin-left: 1rem;
-    padding-bottom: 2rem;
-
-    message {
-        /* 消息间隔 0.5rem */
-        margin-bottom: .5rem
-    }
-
-    message:last-child {
-        /* 取消最后一个的间隔 */
-        margin-bottom: 0;
-    }
-}
-
 /* 消息样式 */
 message {
-    border-radius: 5000px !important;
-    padding: .5rem 1rem;
-    margin: 0 .5rem;
-    border: 1px solid rgba(10, 10, 10, 0.25);
-    background-color: white;
-    color: #0a0a0a;
-
     &.primary {
         background-color: #d7ecfa;
         color: #0a0a0a;

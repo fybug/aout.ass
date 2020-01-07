@@ -6,9 +6,6 @@
  */
 require('./css/main.pcss');
 
-// 加入消息组
-$(() => $(document.body).append($("<messagegroup></messagegroup>")));
-
 /** 发送消息
  *
  * 返回的对象为消息对象
@@ -19,16 +16,16 @@ $(() => $(document.body).append($("<messagegroup></messagegroup>")));
  * message_destroy() 方法销毁消息对象
  */
 window.addmessage = () => {
-    let node = $(
-        "<message>" +
-        "   <i></i><span style='margin-left: 5px'></span>" +
-        "</message>");
+    let node = document.createElement("message");
+    node.appendChild(document.createElement("i"));
+    node.appendChild(document.createElement("span")).style.margin = "5px";
 
-    $("messagegroup").prepend(node);
+    document.querySelector("messagegroup").insertBefore(node);
+
     /** 加载消息 */
     node["message_load"] = (text) => {
-        node.removeClass().addClass("primary");
-        node.children("i").removeClass().addClass("fa fa-refresh fa-spin");
+        //node.removeClass().addClass("primary");
+        //node.children("i").removeClass().addClass("fa fa-refresh fa-spin");
         node.children("span").text(text);
         return node;
     };
