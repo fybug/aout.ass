@@ -1,1 +1,0 @@
-// import dealImage from './img/delimg';

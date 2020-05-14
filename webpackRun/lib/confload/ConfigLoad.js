@@ -2,10 +2,12 @@
  *
  * 使用该模块可以快速加入需要的 webpack 配置
  *
+ * ```javascript 1.6
  * 示例
  * {
  *      // 传入基础 webpack 配置
  *      let confload = new ConfigLoad({});
+ *
  *      // 启动加载，使用 js 加载模块
  *      confload.runOf('ModeLoad',
  *      (modeload) => modeload.publicMode('main', '/src/main.js'))
@@ -19,23 +21,38 @@
  *      .then((pageload) => {
  *             pageload.addPage("/src/index/index.html", 'index', ['index_main']);
  *         })
+ *
  *      // 填充到 webpack 的配置中
  *      .__toConf();
  *  }
+ *  ```
  *
  * @author fybug
  * @version 0.0.1
+ * @since PDWebpack 0.0.1
  */
-global.ConfigLoad = class ConfigLoad {
-    /** 全局加载模块映射 */
+class ConfigLoad {
+    /** 全局加载模块映射
+     *
+     * @type {{
+     *     main:WebpackConf
+     * }}
+     */
     configConllcation = {};
-    /** 模块处理队列 */
+    /** 模块处理队列
+     *
+     * @type ['ModeLoad'|'PageLoad'|'AnonymousLoad']
+     */
     configModeQuery = [];
-    /** 上一次运行的对象 */
+    /** 上一次运行的对象
+     *
+     * @type ModeLoad|PageLoad|AnonymousLoad
+     */
     lastRun = undefined;
 
     /** 构造对象
-     * @param conf 基础配置对象
+     *
+     * @param {WebpackConf} conf 基础配置对象
      */
     constructor(conf) {
         // 放入基础配置的对象
@@ -52,7 +69,11 @@ global.ConfigLoad = class ConfigLoad {
     /** 启动处理
      *
      * @param {string} name 第一次处理的模块
-     * @param {function} fun 处理回调，参数传入 处理的模块，构造时的基础配置对象，模块加载映射，模块加载队列
+     * @param {function(
+     *     (ModeLoad|PageLoad|AnonymousLoad),WebpackConf,{
+     *         main:WebpackConf
+     *     },['ModeLoad'|'PageLoad'|'AnonymousLoad']
+     *  ):('ModeLoad'|'PageLoad'|'AnonymousLoad')} fun 处理回调，参数传入: 处理的模块，构造时的基础配置对象，模块加载映射，模块加载队列
      *
      * @return this
      */
@@ -64,7 +85,12 @@ global.ConfigLoad = class ConfigLoad {
 
     /** 继续处理
      *
-     * @param {function} fun 处理回调，参数传入 处理的模块，构造时的基础配置对象，模块加载映射，模块加载队列
+     * @param {function(
+     *     (ModeLoad|PageLoad|AnonymousLoad),WebpackConf,{
+     *         main:WebpackConf
+     *     },['ModeLoad'|'PageLoad'|'AnonymousLoad']
+     *  ):('ModeLoad'|'PageLoad'|'AnonymousLoad')} fun 处理回调，参数传入: 处理的模块，构造时的基础配置对象，模块加载映射，模块加载队列
+     *
      * @return this
      */
     then(fun) {
@@ -78,7 +104,8 @@ global.ConfigLoad = class ConfigLoad {
     };
 
     /** 填充生成的配置到基础配置对象中
-     * @return 生成的配置对象
+     *
+     * @return {WebpackConf} 生成的 webpack 配置对象
      */
     __toConf() {
         this.configModeQuery.forEach((v) => {
@@ -90,4 +117,7 @@ global.ConfigLoad = class ConfigLoad {
 
         return this.configConllcation.main;
     }
-};
+}
+
+/** @type ConfigLoad */
+global.ConfigLoad = ConfigLoad;

@@ -1,1 +1,0 @@
-module.exports = (name, defa = './') => Conf[name + 'Out'].urlOf || Conf.Out.urlOf || defa;

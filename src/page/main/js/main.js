@@ -1,8 +1,6 @@
-// 页面 js 入口
-import {FloatMessage} from "../../../lib/js/lib/ui/float_message/floatMessage"
-import {Message} from "../../../lib/js/lib/ui/float_message/message";
+require("../css/main.pcss");
 
-var l = new FloatMessage();
-l.showMessage().show(Message.ERROR);
-l.showMessage().show();
-l.showMessage().show();
+// 页面 js 入口
+let dom = document.createElement('h2');
+document.body.appendChild(dom);
+dom.innerText = 'main.js is run';

@@ -7,5 +7,5 @@ require('../lib/INCL');
 
 // 导入用户配置
 require('../cofig/conf');
-require('../cofig/htmlConfTmp');
-require('../cofig/webpackConf');
+require('../cofig/webpack/conf');
+require('../cofig/plugins/pluginsload');

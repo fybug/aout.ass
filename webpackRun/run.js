@@ -1,8 +1,7 @@
-confload.runOf('ModeLoad', /** @param {global#ModeLoad} modeload */(modeload) => {
-    modeload.publicMode('app_s', SourcePath + 'lib/js/style',"async");
-    modeload.publicMode('modernizr', SourcePath + 'lib/js/INCL/modernizr');
-    modeload.publicMode('app', SourcePath + 'lib/js/main', "defer");
-    return 'PageLoad';
-}).then((pageLoad) => {
-    pageLoad.addPage(SourcePath + 'index.html', 'index');
+aout_ass.modifyMode("app", (mode) => {
+    mode.mode = "defer";
+    return mode;
+}).modifyPage("main", (page) => {
+    console.debug(page.chunk);
+    return page;
 });
