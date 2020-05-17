@@ -9,6 +9,6 @@ module.exports = (confget, conf) => [
 
     // css 文件抽离插件
     new MiniCssExtractPlugin({
-        filename: confget.GetOutName('css', '[id][name][chunkhash:8].css'),
+        filename: confget.GetOutName('css', 'style/[id][name][chunkhash:8].css'),
     })
 ];

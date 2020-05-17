@@ -15,7 +15,7 @@ global.WebpackConf = () => {
         /** 输出配置 */
         output: {
             /** 输出的文件名 */
-            filename: confget.GetOutName('js', "[id][name][chunkhash:8].js"),
+            filename: confget.GetOutName('js', "script/[id][name][chunkhash:8].js"),
             /** 输出路径 */
             path: OutPath,
             /** url 替换 */
