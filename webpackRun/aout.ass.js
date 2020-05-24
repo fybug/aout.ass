@@ -13,7 +13,7 @@ class Aout_Ass {
     /** 运行列表
      *
      * @var {{
-     *     call:name,
+     *     call:'ModeLoad'|'PageLoad'|'AnonymousLoad',
      *     fun:function
      * }[]}
      */
@@ -53,18 +53,16 @@ class Aout_Ass {
     lastrun = "ModeLoad";
     /** 配置加载对象
      *
-     * @var {global.ConfigLoad}
+     * @var {ConfigLoad}
      */
     confload;
 
     /** 初始化配置加载对象
      *
-     * @param {global.ConfigLoad} confload 配置加载对象
+     * @param {ConfigLoad} confload 配置加载对象
      */
     constructor(confload) {
-        this.confload = confload.runOf("ModeLoad", () => {
-            return "ModeLoad";
-        });
+        this.confload = confload.runOf("ModeLoad", () => "ModeLoad");
     }
 
     /** 申请加载模块使用
@@ -80,6 +78,8 @@ class Aout_Ass {
     }
 
     /** 追加加载回调
+     *
+     * 加载回调在原框架 PDWebpack 的 {ConfigLoad} 上使用
      *
      * @param {runlist} fun 资源运行对象列表
      *
