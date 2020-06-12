@@ -37,14 +37,6 @@ module.exports = (confget, conf) => [
     {
         test: /\.(gif|png|jpe?g|webp|svg)$/,
         use: [{
-            loader: 'url-loader',
-            options: {
-                // 小于 8k 全部压缩
-                limit: 8192,
-                name: confget.GetOutName('img', 'static/pic/[name].[ext]'),
-                publicPath: confget.GetUrlOf('img')
-            }
-        }, {
             loader: 'image-webpack-loader',
             options: {
                 progressive: true,
@@ -58,6 +50,14 @@ module.exports = (confget, conf) => [
                 gifsicle: {interlaced: false},
                 // webp
                 webp: {quality: 75}
+            }
+        }, {
+            loader: 'url-loader',
+            options: {
+                // 小于 8k 全部压缩
+                limit: 8192,
+                name: confget.GetOutName('img', 'static/pic/[name].[ext]'),
+                publicPath: confget.GetUrlOf('img')
             }
         }]
     },
