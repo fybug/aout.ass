@@ -39,13 +39,10 @@ module.exports = (confget, conf) => [
         use: [{
             loader: 'image-webpack-loader',
             options: {
-                progressive: true,
-                optimizationLevel: 7,
-                interlaced: false,
                 // jpeg / jpg
-                mozjpoeg: {quality: 70},
+                mozjpoeg: {quality: 70, progressive: true,},
                 // png
-                pngquant: {quality: "65-90", speed: 4},
+                pngquant: {optimizationLevel: 7, quality: "65-90", speed: 4},
                 // gif
                 gifsicle: {interlaced: false},
                 // webp
@@ -72,11 +69,6 @@ module.exports = (confget, conf) => [
                 publicPath: confget.GetUrlOf('font')
             }
         }
-    },
-    // 序列化的数据
-    {
-        test: /\.(json|txt|xml)$/,
-        loader: 'file-loader',
     },
     // html
     {
