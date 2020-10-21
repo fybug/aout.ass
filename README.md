@@ -1,6 +1,6 @@
 # aout.ass
 ![](https://img.shields.io/badge/version-0.0.1-00b58a.svg "当前版本")
-![](https://img.shields.io/badge/webpack-4.41.5+-2e93ff.svg "开发所使用等等 webpack 版本")
+![](https://img.shields.io/badge/webpack-4.44.2+-2e93ff.svg "开发所使用等等 webpack 版本")
 ![](https://img.shields.io/badge/license-Apache%202.0-f27122.svg "使用的开源协议")
 
 基于 [PDWebpack](https://gitee.com/PatternDirClean/PDWebpack) 制作的手脚架。自动扫描按规范目录开发的内容，并添加到 **webpack** 中进行打包。
@@ -82,20 +82,16 @@
 
 在项目文件夹中运行 `npm -y init` 初始化
 
-## 安装 **webpack**
-```
-npm install webpack webpack-cli webpack-dev-server -g
-```
-
 ## 安装项目依赖
 ```
 npm install --save-dev
 ```
+> 包含了 **webpack** 和 **webpack-dev-server**
 
 ## 额外
 ### 安装 **postcss**
 ```
-npm install postcss-cli -g
+npm install postcss-loader -D
 ```
 ### 使用的 **postcss** 模块
 ```
