@@ -59,7 +59,14 @@ class ConfToWebpack {
     };
 
     __g(name, key) {
-        let out = this.CONF[name];
+        let out;
+
+        // 读取开发者配置里的数据
+        if ("dev" === global.webpackmode && (out = this.CONF.devtool[name]) && out[key])
+            return out[key]
+
+        // 读取通常配置里的数据
+        out = this.CONF[name];
 
         if (out && out[key])
             return out[key];

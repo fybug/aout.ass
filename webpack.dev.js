@@ -1,3 +1,4 @@
+global.webpackmode = "dev"
 const config = require('./webpack.conf.js');
 
 const Devtool = Conf.devtool;
