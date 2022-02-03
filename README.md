@@ -3,7 +3,7 @@
 
 # aout.ass
 ![](https://img.shields.io/badge/version-0.0.1-00b58a.svg "当前版本")
-![](https://img.shields.io/badge/PDWebpack-0.0.1-76aecb.svg "开发所使用等等 webpack 版本")
+![](https://img.shields.io/badge/PDWebpack-0.0.1-76aecb.svg "开发所使用的 webpack 版本")
 ![](https://img.shields.io/badge/license-Apache%202.0-f27122.svg "使用的开源协议")
 
 基于 [PDWebpack](https://gitee.com/PatternDirClean/PDWebpack) 制作的 web 自动化构建手脚架。自动扫描按规范目录开发的内容，随后使用 **PDWebpack** 生成配置，并添加到 **webpack** 中进行打包。
