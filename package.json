@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot -w --config webpack.dev.js",
-    "bulic": "webpack -p --config webpack.prod.js"
+    "bulic": "webpack --define process.env.NODE_ENV=\"production\" --config webpack.prod.js"
   },
   "author": "fybug",
   "license": "Apache2",
